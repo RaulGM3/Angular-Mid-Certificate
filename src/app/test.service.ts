@@ -6,5 +6,7 @@ import { Injectable, signal } from '@angular/core';
 export class TestService {
   independencyTest = signal('test');
 
-  constructor() { }
+  constructor() {
+    console.log ('se inicia!')
+  }
 }

@@ -178,15 +178,19 @@
 </style>
 
 <main class="main">
-  <div class="content">
-    <div class="left-side">
-      <app-a></app-a>
+  <!-- <button yt-button></button> -->
+  <button (click)="render ()">activate</button>
+  <!-- @if (renderMe) { -->
+    <div class="content">
+      <div class="left-side">
+        <app-a></app-a>
+      </div>
+      <div class="divider" role="separator" aria-label="Divider"></div>
+      <div class="right-side">
+        <app-b></app-b>
+      </div>
     </div>
-    <div class="divider" role="separator" aria-label="Divider"></div>
-    <div class="right-side">
-      <app-b></app-b>
-    </div>
-  </div>
+  <!-- } -->
 </main>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
