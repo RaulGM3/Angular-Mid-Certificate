@@ -13,6 +13,13 @@ import { YoutubeButtonComponent } from './youtube-button/youtube-button.componen
 export class AppComponent {
   title = 'test';
   renderMe = false;
+  initialCount = 0;
+  listClasses = 'full-width outlined';
+  sectionClasses = ['expandable', 'elevated'];
+  buttonClasses = {
+    highlighted: true,
+    embiggened: false,
+  };
 
   render () {
     this.renderMe = true;

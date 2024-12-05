@@ -7,5 +7,4 @@ import { Component } from '@angular/core';
   styleUrl: './youtube-button.component.sass'
 })
 export class YoutubeButtonComponent {
-
 }

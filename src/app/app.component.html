@@ -181,17 +181,24 @@
   <button disabled="false" yt-button></button>
   <button disabled="true" yt-button></button>
   <button (click)="render ()">activate</button>
-  @if (renderMe) {
-    <div class="content">
+  <div class="content">
+    @if (renderMe) {
       <div class="left-side">
-        <app-a></app-a>
+        <app-a [(count)]="initialCount"></app-a>
+      </div>
+      <div class="left-side">
+        {{ initialCount }}
       </div>
       <div class="divider" role="separator" aria-label="Divider"></div>
       <div class="right-side">
-        <app-b></app-b>
+        <app-b [(count)]="initialCount"></app-b>
       </div>
-    </div>
-  }
+    }
+    <ul [class]="listClasses"> Different tag classes posibilities. </ul>
+    <section [class]="sectionClasses"> Different tag classes posibilities. </section>
+    <button [class]="buttonClasses"> Different tag classes posibilities. </button>
+  </div>
+
 </main>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

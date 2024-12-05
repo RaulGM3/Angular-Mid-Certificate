@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { TestService } from '../test.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { TestService } from '../test.service';
   styleUrl: './a.component.sass'
 })
 export class AComponent {
+  @Input() count!: number;
+  @Output() countChange = new EventEmitter<number>();
   injectTest = inject(TestService).independencyTest;
   constructor(
   ) { }
@@ -18,5 +20,11 @@ export class AComponent {
 
   onClick () {
     this.injectTest.set ('testear');
+    this.add ();
+  }
+
+  add () {
+    this.count++;
+    this.countChange.emit (this.count);
   }
 }
