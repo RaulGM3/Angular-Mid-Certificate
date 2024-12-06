@@ -1,4 +1,4 @@
-import { afterNextRender, Component, computed, ElementRef, signal, ViewChild, viewChild } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, ElementRef, signal, ViewChild, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import _ from 'lodash';
 import { Observable } from 'rxjs';
@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-root',
   imports: [CommonModule, RouterOutlet, AComponent, BComponent, CComponent, YoutubeButtonComponent],
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './app.component.sass'
 })
 export class AppComponent {
