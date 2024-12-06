@@ -39,6 +39,8 @@ export class AppComponent {
   showPopup = false;
 
   anyInput = 'Any Input';
+  @ViewChild ('viewChildRef') viewChildRef!: ElementRef;
+  result = '';
 
   ngOnInit(): void {
     this.counter.set (3);
@@ -64,5 +66,11 @@ export class AppComponent {
   popupClosed(event: any) {
     console.log(event);
     this.showPopup = false;
+  }
+
+  viewchildInputKD (ev: KeyboardEvent) {
+    console.log (ev);
+    this.result = this.viewChildRef.nativeElement.value;
+    // console.log (this.viewChildRef.nativeElement.value);
   }
 }

@@ -186,14 +186,14 @@
     <div class="content">
       @if (renderMe) {
         <div class="left-side">
-          <app-a [(count)]="initialCount"></app-a>
+          <app-a [(count)]="initialCount" />
         </div>
         <div class="left-side">
           {{ initialCount }}
         </div>
         <div class="divider" role="separator" aria-label="Divider"></div>
         <div class="right-side">
-          <app-b [(count)]="initialCount"></app-b>
+          <app-b [(count)]="initialCount" />
         </div>
       }
       <ul [class]="listClasses"> Different tag classes posibilities. </ul>
@@ -249,12 +249,13 @@
     <h1>ViewChild and ViewContent</h1>
     <div class="content">
       <div class="left-side">
-        <!-- <h4>ViewChild</h4> -->
-        <!-- <button (click)="toggle ()">Toggle</button>
-        <div *ngIf="show">This is a div</div> -->
+        <h4>ViewChild</h4>
+        <input type="text" #viewChildRef (keyup)="viewchildInputKD ($event)">
+        {{ result }}
       </div>
+
       <div class="divider"></div>
-      <h4>ViewContent</h4>
+
       <div class="right-side">
         <h4>ViewContent</h4>
         <p>
@@ -264,8 +265,9 @@
             [isOpen]="showPopup"
             title="Test pop-up"
             (onClose)="popupClosed($event)"
+            #content
           >
-            This is the content of the pop-up (thanks to content projection)
+            <h1 #text>Hello</h1>
           </app-popup-window>
         </p>
       </div>  
