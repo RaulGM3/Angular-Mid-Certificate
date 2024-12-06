@@ -9,10 +9,11 @@ import { CComponent } from './c/c.component';
 import { YoutubeButtonComponent } from './youtube-button/youtube-button.component';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { PopupWindowComponent } from './popup-window/popup-window.component';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, AComponent, BComponent, CComponent, YoutubeButtonComponent],
+  imports: [CommonModule, RouterOutlet, AComponent, BComponent, CComponent, YoutubeButtonComponent, PopupWindowComponent],
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './app.component.sass'
@@ -35,6 +36,8 @@ export class AppComponent {
   myArray = computed(() => Array.from(this.set()));
   counter$ = toObservable(this.counter);
 
+  showPopup = false;
+
   anyInput = 'Any Input';
 
   ngOnInit(): void {
@@ -56,5 +59,10 @@ export class AppComponent {
 
   triggerOtherInput () {
     this.anyInput = 'Triggered Other Input';
+  }
+
+  popupClosed(event: any) {
+    console.log(event);
+    this.showPopup = false;
   }
 }
