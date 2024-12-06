@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { afterNextRender, Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { TestService } from '../test.service';
 
 @Component({
@@ -11,8 +11,15 @@ export class AComponent {
   @Input() count!: number;
   @Output() countChange = new EventEmitter<number>();
   injectTest = inject(TestService).independencyTest;
-  constructor(
-  ) { }
+  testRef = signal('Esto es una variable de a-comp y usada en un componente padre.');
+  lifecycleCount = signal(['Rendered']);
+
+  constructor () {
+    afterNextRender (() => { // es como AfterViewInit
+      this.lifecycleCount.update (x => [...x, 'After next render']);
+    })
+    afterNextRender (() => {}) // se ejecuta para programar animaciones o transiciones después del renderizado actual
+  }
 
   ngOnInit(): void {
     console.log (this.injectTest ());
@@ -26,5 +33,6 @@ export class AComponent {
   add () {
     this.count++;
     this.countChange.emit (this.count);
+    this.testRef.set ('Sumando!');
   }
 }

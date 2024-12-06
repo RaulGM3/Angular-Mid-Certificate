@@ -1,4 +1,10 @@
-<button (click)="onClick ()">
+<button (click)="onClick ()" #buttonRef>
   sumar
 </button>
 
+
+<ul>
+  @for (lifeC of lifecycleCount (); track lifeC) {
+    <li>{{ lifeC }}</li>
+  }
+</ul>

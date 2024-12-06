@@ -70,6 +70,7 @@
     padding: 1rem;
     box-sizing: inherit;
     position: relative;
+    flex-direction: column;
   }
 
   .angular-logo {
@@ -178,36 +179,72 @@
 </style>
 
 <main class="main">
-  <button disabled="false" yt-button></button>
-  <button disabled="true" yt-button></button>
-  <button (click)="render ()">activate</button>
-  <div class="content">
-    @if (renderMe) {
+  <section>
+    <button disabled="false" yt-button></button>
+    <button disabled="true" yt-button></button>
+    <button (click)="render ()">activate</button>
+    <div class="content">
+      @if (renderMe) {
+        <div class="left-side">
+          <app-a [(count)]="initialCount"></app-a>
+        </div>
+        <div class="left-side">
+          {{ initialCount }}
+        </div>
+        <div class="divider" role="separator" aria-label="Divider"></div>
+        <div class="right-side">
+          <app-b [(count)]="initialCount"></app-b>
+        </div>
+      }
+      <ul [class]="listClasses"> Different tag classes posibilities. </ul>
+      <section [class]="sectionClasses"> Different tag classes posibilities. </section>
+      <button [class]="buttonClasses"> Different tag classes posibilities. </button>
+    </div>
+  </section>
+  <!-- SIGNALS -->
+  <section>
+    <h1>Signals</h1>
+    counter signal: {{ counter () }}
+    double counter signal: {{ doubleCount () }}
+    <div class="content">
       <div class="left-side">
-        <app-a [(count)]="initialCount"></app-a>
+        <h4>myArray</h4>
+        <ul>
+          @for (i of myArray(); track i) {
+            <li>{{i}}</li>
+          }
+        </ul>
+        This is the counter as an observable {{ counter$ | async }}
       </div>
-      <div class="left-side">
-        {{ initialCount }}
-      </div>
-      <div class="divider" role="separator" aria-label="Divider"></div>
+      <div class="divider"></div>
       <div class="right-side">
-        <app-b [(count)]="initialCount"></app-b>
+
       </div>
-    }
-    <ul [class]="listClasses"> Different tag classes posibilities. </ul>
-    <section [class]="sectionClasses"> Different tag classes posibilities. </section>
-    <button [class]="buttonClasses"> Different tag classes posibilities. </button>
-  </div>
+    </div>
+  </section>
+  <section>
+    <h1>#Reference</h1>
+    
+    <div class="content">
+      <div class="left-side">
+        <app-a #myRef>
+        </app-a>
+        <!-- <input type="text" [value]="myRef.testRef"> We have an error because myRef.testRef is readOnly-->
+         <h4>{{ myRef.testRef () }}</h4>
+         <label>Input 1</label>
+         <input type="text" #inputRef (keydown)="monitorInput($event)">
 
+         <label>Input 2</label>
+         <input type="text" [value]="inputRef.value">
+         {{ inputRef.value}}
+      </div>
+      <div class="divider"></div>
+      <div class="right-side">
+        <button (click)="triggerOtherInput ()">Trigger Input</button>
+        <app-c [anyInput]="anyInput"></app-c>
+      </div>
+    </div>
+  </section>
 </main>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 
 <router-outlet />
