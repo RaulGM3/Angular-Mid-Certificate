@@ -176,25 +176,64 @@
         <h1>Utility Type</h1>
         <h4>Go to User.ts to see the guide</h4>
         <a href="https://www.youtube.com/watch?v=EU0TB_8KHpY">Watch youtube video with a summary</a>
-        <ul>
-          <li>PartialUser: Partial&lt;User&gt;</li>
-          <li>RequiredUser: Required&lt;User&gt;</li>
-          <li>OmitUser: Omit&lt;User, 'age' | 'gender'&gt;</li>
-          <li>PickedUser: Pick&lt;User, 'age' | 'gender'&gt;</li>
-          <li>PartiallyPickedUser: Partial&lt;Pick&lt;User, 'age' | 'gender'&gt;&gt;</li>
-          <li>ReadonlyUser: Readonly&lt;User&gt;</li>
-          <li>MutableUser: Mutable&lt;ReadonlyUser&gt;</li>
-          <li>NonAdminRole: Exclude&lt;Role, 'admin' | 'guest'&gt;</li>
-          <li>AdminRole: Extract&lt;RoleAttributes, role: 'admin'&gt;</li>
-          <li>ReturnValue: ReturnType&lt;Funct&gt;</li>
-          <li>Params: Parameters&lt;Funct&gt;</li>
-          <li>DefinitelyString: NonNullable&lt;MaybeString&gt;</li>
-          <li>Result: Awaited&lt;PromiseString&gt;</li>
-          <li>funcResult: Awaited&lt;ReturnType&lt;typeof func&gt;&gt;</li>
-        </ul>
+        <pre>
+          <code>
+  export interface User &#123;
+    name: string;
+    age: number;
+    gender: boolean;
+  &#125;
+
+  export type PartialUser = Partial&lt;User&gt;;
+  export type RequiredUser = Required&lt;User&gt;;
+  export type OmitUser = Omit&lt;User, 'age' | &quot;gender&quot;&gt;;
+  export type PickedUser = Pick&lt;User, 'age' | &quot;gender&quot;&gt;;
+  export type PartiallyPickedUser = Partial&lt;Pick&lt;User, 'age' | &quot;gender&quot;&gt;&gt;;
+  export type ReadonlyUser = Readonly&lt;User&gt;;
+
+  type Mutable &lt;T&gt; = &#123;
+    -readonly [K in keyof T]: T[K];
+  &#125;;
+  type MutableUser = Mutable&lt;ReadonlyUser&gt;;
+
+  // UNION TYPES
+
+  export type Role = &quot;admin&quot; | &quot;user&quot; | &quot;guest&quot;;
+  type NonAdminRole = Exclude&lt;Role, &quot;admin&quot; | &quot;guest&quot;&gt;;
+
+  type RoleAttributes = 
+    &#123; role: &quot;admin&quot;, permissions: string[] &#125; |
+    &#123; role: &quot;user&quot; &#125; |
+    &#123; role: &quot;guest&quot; &#125;;
+
+  type AdminRole = Extract&lt;RoleAttributes, &#123; role: &quot;admin&quot; &#125;&gt;;
+
+  // RETURN TYPE
+  type Funct = (a: number, b: string) =&gt; string;
+  type ReturnValue = ReturnType&lt;Funct&gt;;
+  type Params = Parameters&lt;Funct&gt;;
+
+  type MaybeString = string | null | undefined;
+  type DefinitelyString = NonNullable&lt;MaybeString&gt;;
+  type PromiseString = Promise&lt;string&gt;;
+  type Result = Awaited&lt;PromiseString&gt;;
+
+  // CHALLENGE
+  const func = async () =&gt; &#123;
+    return &#123;
+      id: 123,
+    &#125;;
+  &#125;;
+
+  type funcResult = Awaited&lt;ReturnType&lt;typeof func&gt;&gt;;
+          </code>
+        </pre>
+          
       </div>
       <div class="divider" role="separator" aria-label="Divider"></div>
-      <div class="right-side"></div>
+      <div class="right-side">
+        <h1>Classes</h1>
+      </div>
     </div>
   </section>
 </main>
