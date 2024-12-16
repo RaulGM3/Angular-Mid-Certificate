@@ -1,0 +1,18 @@
+<p appHighlight>directives-test works!</p>
+<p [appConditionalHighlight]="color" defaultColor="violet">conditional highlight works! Mouse in and out</p>
+<h4>Pick a highlight color</h4>
+<div>
+  <input type="radio" name="colors" (click)="turnGreen ()">lightgreen
+  <input type="radio" name="colors" (click)="turnRed ()">cyan
+  <input type="radio" name="colors" (click)="turnYellow ()">yellow
+</div>
+<p ngNonBindable>This is a nonBindable test{{1+1}}</p>
+<p>This is a nonBindable test{{1+1}}</p>
+<h3>ngNonBindable with a directive</h3>
+<div ngNonBindable [appConditionalHighlight]="'yellow'">This should not evaluate: {{ 1 +1 }}, but will highlight yellow.
+</div>
+<h4>host binding</h4>
+<button appHosters [class]="myClasses" [disabled]="!notActive">
+  Host binding works!
+</button>
+<p>The cool thing about HostBinding is that it can modify the DOM of the element.</p>

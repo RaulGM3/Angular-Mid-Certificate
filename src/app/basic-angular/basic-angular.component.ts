@@ -10,10 +10,11 @@ import { YoutubeButtonComponent } from '../youtube-button/youtube-button.compone
 import { toObservable } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { PopupWindowComponent } from '../popup-window/popup-window.component';
+import { DirectivesTestComponent } from '../directives-test/directives-test.component';
 
 @Component({
   selector: 'app-basic-angular',
-  imports: [CommonModule, AComponent, BComponent, CComponent, YoutubeButtonComponent, PopupWindowComponent],
+  imports: [CommonModule, AComponent, BComponent, CComponent, YoutubeButtonComponent, PopupWindowComponent, DirectivesTestComponent],
   templateUrl: './basic-angular.component.html',
   styleUrl: './basic-angular.component.sass'
 })
