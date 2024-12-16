@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { HighlightDirective } from '../highlight-test.directive';
 import { ConditionalHighlightDirective } from '../conditional-highlight.directive';
 import { HostersDirective } from '../hosters.directive';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-directives-test',
@@ -30,6 +31,14 @@ export class DirectivesTestComponent {
   turnYellow () {
     this.color='yellow'
     console.log ('this.color')
+  }
+  constructor (
+    private route: ActivatedRoute
+  ){}
+  ngAfterViewChecked(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+    console.log ('url en directives', this.route.snapshot.url)
   }
 }
  

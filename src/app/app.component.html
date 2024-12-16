@@ -1,1 +1,13 @@
+<button>
+  <!-- <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="no-deco">Directives Test</a> -->
+  <a routerLink="/basic-angular" routerLinkActive="active" class="no-deco">Directives Test</a>
+  <!-- here I'm triggering the root director and as the root redirects to basic-angular, it should be triggered when typescript test is clicked.
+   That's how routerLinkActiveOptions work. It prevents that behaviour to happen. -->
+</button>
+<button>
+  <a routerLink="/typescript" routerLinkActive="active" class="no-deco">Typescript Test</a>
+</button>
+<button>
+  <a routerLink="/router-test" routerLinkActive="active" class="no-deco">Router Test</a>
+</button>
 <router-outlet />
