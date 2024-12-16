@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { ChildComponent } from './router-test/test1/child/child.component';
 import { authGuardGuard } from './auth-guard.guard';
+import { AuthService } from './auth.service';
+import { inject } from '@angular/core';
 
 export const routes: Routes = [
   {
@@ -28,7 +30,8 @@ export const routes: Routes = [
             path: ':id',
             loadComponent: () => import('./router-test/test1/child/child.component').then( m => m.ChildComponent),
           }
-        ]
+        ],
+        canDeactivate: [(component: ChildComponent) => component.saved ()]
       },
       {
         path: 'test2',
@@ -38,10 +41,11 @@ export const routes: Routes = [
         path: 'guarded',
         loadComponent: () => import('./router-test/guarded/guarded.component').then( m => m.GuardedComponent),
         canActivate: [authGuardGuard]
+        // canActivate: [() => inject(AuthService).isLoggedIn()]
       },
       {
         path: '',
-        redirectTo: 'test1',
+        redirectTo: 'test1/3',
         pathMatch: 'full'
       }
     ]
