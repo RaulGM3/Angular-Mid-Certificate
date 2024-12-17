@@ -5,6 +5,7 @@ import { Injectable, signal } from '@angular/core';
 })
 export class AuthService {
   isLoggedIn = signal (false);
+  isSaved = signal (false);
 
   constructor() { }
 
@@ -16,5 +17,9 @@ export class AuthService {
   logout () {
     this.isLoggedIn.set (false);
     console.log ('logout activado', this.isLoggedIn ())
+  }
+
+  save () {
+    this.isSaved.set (true);
   }
 }

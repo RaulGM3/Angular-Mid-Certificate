@@ -19,6 +19,37 @@ export const routes: Routes = [
     loadComponent: () => import('./typescript-test/typescript-test.component').then( m => m.TypescriptTestComponent),
   },
   {
+    path: 'rxjs',
+    loadComponent: () => import('./rxjs-test/rxjs-test.component').then( m => m.RxjsTestComponent),
+    children: [
+      {
+        path: 'filter-states',
+        loadComponent: () => import('./rxjs-test/filter-states/filter-states.component').then( m => m.FilterStatesComponent),
+      },
+      {
+        path: 'subjects',
+        loadComponent: () => import('./rxjs-test/subjects/subjects.component').then( m => m.SubjectsComponent),
+      },
+      {
+        path: 'pipes',
+        loadComponent: () => import('./pipes/pipes.component').then( m => m.PipesComponent),
+      },
+      {
+        path: 'interval',
+        loadComponent: () => import('./rxjs-test/interval/interval.component').then( m => m.IntervalComponent),
+      },
+      {
+        path: 'operators',
+        loadComponent: () => import('./rxjs-test/operators/operators.component').then( m => m.OperatorsComponent),
+      },
+      {
+        path: '',
+        redirectTo: 'filter-states',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {
     path: 'router-test',
     loadComponent: () => import('./router-test/router-test.component').then( m => m.RouterTestComponent),
     children: [
@@ -31,7 +62,10 @@ export const routes: Routes = [
             loadComponent: () => import('./router-test/test1/child/child.component').then( m => m.ChildComponent),
           }
         ],
-        canDeactivate: [(component: ChildComponent) => component.saved ()]
+        canDeactivate: [
+          () => inject(AuthService).isSaved() || window.confirm('Are you sure you want to leave?')
+        ]
+    
       },
       {
         path: 'test2',

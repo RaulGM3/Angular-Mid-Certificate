@@ -12,10 +12,14 @@ export class ChildComponent {
   asdf = '';
   saved = signal (false);
   
-  constructor (
-    private authServ: AuthService
-  ) {}
+  constructor (private authService: AuthService) {}
+
   toSave () {
     this.saved.set (true);
+    this.authService.save ();
+  }
+  
+  isSaved () {
+    return this.saved();
   }
 }

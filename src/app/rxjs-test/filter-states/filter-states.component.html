@@ -1,0 +1,8 @@
+<p>filter-states works!</p>
+<label for="">State</label>
+<input type="text" [formControl]="filter" placeholder="Filter states...">
+<ul>
+  @for (s of filteredStates$ | async; track s.id) {
+    <li>{{ s.name }}</li>
+  }
+</ul>
