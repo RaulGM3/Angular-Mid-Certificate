@@ -1,0 +1,25 @@
+<h1>Pipes</h1>
+<p>The total amount is {{amount () | currency}}</p>
+<p>The tax is {{tax () | currency}}</p>
+<p>The tip percentage is {{ tipPercentage | percent }}</p>
+<p>The tip is {{ tip () | currency }} </p>
+<h3>So the total is {{ total () | currency }} </h3>
+<h3>This is a number pipe with 5.6-8 {{ randomNumber | number: '5.6-8' }} </h3>
+<ul>
+  <li>5. is the min number of digits at the left of the .</li>
+  <li>6- is the min number of digits <b>at the right</b> of the .</li>
+  <li>8 is the max of digits at the right of the .</li>
+</ul>
+
+<h2>Custom Pipe (kebab)</h2>
+<p>My name is {{ myName | kebabCase }}</p>
+
+
+<h2>Custom Pipe (kebab) With Parameter</h2>
+<p>My name is {{ myName | dynamicCase: format }}</p>
+<ul>
+  <li (click)="format = 'kebab'">kebab</li>
+  <li (click)="format = 'snake'">snake</li>
+  <li (click)="format = 'camel'">camel</li>
+  <li (click)="format = 'pascal'">pascal</li>
+</ul>

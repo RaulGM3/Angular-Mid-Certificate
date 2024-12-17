@@ -19,6 +19,10 @@ export const routes: Routes = [
     loadComponent: () => import('./typescript-test/typescript-test.component').then( m => m.TypescriptTestComponent),
   },
   {
+    path: 'pipes',
+    loadComponent: () => import('./pipes/pipes.component').then( m => m.PipesComponent),
+  },
+  {
     path: 'rxjs',
     loadComponent: () => import('./rxjs-test/rxjs-test.component').then( m => m.RxjsTestComponent),
     children: [
@@ -29,10 +33,6 @@ export const routes: Routes = [
       {
         path: 'subjects',
         loadComponent: () => import('./rxjs-test/subjects/subjects.component').then( m => m.SubjectsComponent),
-      },
-      {
-        path: 'pipes',
-        loadComponent: () => import('./pipes/pipes.component').then( m => m.PipesComponent),
       },
       {
         path: 'interval',
