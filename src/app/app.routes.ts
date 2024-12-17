@@ -23,6 +23,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pipes/pipes.component').then( m => m.PipesComponent),
   },
   {
+    path: 'forms',
+    loadComponent: () => import('./forms/forms.component').then( m => m.FormsComponent),
+  },
+  {
     path: 'rxjs',
     loadComponent: () => import('./rxjs-test/rxjs-test.component').then( m => m.RxjsTestComponent),
     children: [
