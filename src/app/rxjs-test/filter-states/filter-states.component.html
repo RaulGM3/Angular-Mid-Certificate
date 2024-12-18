@@ -1,5 +1,5 @@
 <p>filter-states works!</p>
-<label for="">State</label>
+<label for="">State with debounce time</label>
 <input type="text" [formControl]="filter" placeholder="Filter states...">
 <ul>
   @for (s of filteredStates$ | async; track s.id) {

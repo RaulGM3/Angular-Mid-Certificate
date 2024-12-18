@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { map, of } from 'rxjs';
+import { concatMap, delay, filter, map, of, pipe, timer } from 'rxjs';
 
 @Component({
   selector: 'app-operators',
@@ -15,5 +15,21 @@ export class OperatorsComponent {
   constructor () {
     this.squaredNums = this.squareValues (this.nums);
     this.squaredNums.subscribe (x => console.log (x));
+    console.log ('');
+    console.log ('PIPE FUNCTION');
+    console.log ('');
+    const squareOddVals = pipe (
+      filter ((n: number) => n % 2 !== 0),
+      map(n => n * n)
+    );
+    const squareOdd = squareOddVals(this.nums);
+    // Subscribe to run the combined functions
+    squareOdd.subscribe(x => console.log(x));
+    // this.nums.pipe (delay (3000)).subscribe (x => console.log (x)); // esto ejecuta el observable nums después de 3 segundos.
+    this.nums.pipe( // concatMap espera a que el observable anterior termine para ejecutar el siguiente. 
+                    // Separa cada ocurrencia de nums en un observable independiente.
+      concatMap (x => timer(1000).pipe(map(() => x))) // Retrasa cada emisión 1 segundo.
+    ).subscribe(x => console.log('x', x));
+     
   }
 }

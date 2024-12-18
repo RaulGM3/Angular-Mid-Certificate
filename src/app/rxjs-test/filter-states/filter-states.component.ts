@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { combineLatest, Observable, startWith, Subject, map } from 'rxjs';
+import { combineLatest, Observable, startWith, Subject, map, delay, debounceTime } from 'rxjs';
 interface State {
   name: string;
   id: number;
@@ -26,7 +26,7 @@ export class FilterStatesComponent {
       // to convert it to json we need to attach .then(res => res.json())
                   // use http instead
     this.states$ = this.http.get<State []>('http://localhost:3000/api/data');
-    this.filter$ = this.filter$ = this.filter.valueChanges.pipe(startWith(''));
+    this.filter$ = this.filter.valueChanges.pipe(startWith(''), debounceTime (1000)); // distinctUntilChanged filters out consecutive duplicate values
     this.filteredStates$ = combineLatest([this.states$, this.filter$]).pipe(
       map(([states, filterString]) => states.filter(state => state.name.toLowerCase().indexOf(filterString.toLowerCase()) !== -1))
     );
