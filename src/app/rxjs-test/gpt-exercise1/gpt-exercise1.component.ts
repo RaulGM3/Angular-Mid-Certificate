@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, ElementRef, ViewChild, } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, signal, ViewChild, } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { debounceTime, fromEvent, map, Observable, of, switchMap } from 'rxjs';
+import { catchError, debounceTime, fromEvent, map, Observable, of, retry, switchMap } from 'rxjs';
 
 class State {
   id: number;
@@ -22,20 +22,32 @@ export class GptExercise1Component {
   // The exercise is to make an input and ask a dynamic api for data.
   // needs to have a debouncetime and switchMap
   @ViewChild ('inputText') input!: ElementRef
-  result: State = new State ();
+  result = signal ('');
 
   constructor (private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
     const a = fromEvent<KeyboardEvent>(this.input.nativeElement, 'keyup')
-    .pipe(debounceTime (2000));
+    .pipe(debounceTime (300));
     a.pipe (
       map (event => (event.target as HTMLInputElement).value),
-      switchMap (val => this.callApi (val))
+      switchMap (val => this.callApi (val)),
+      retry (3), // Reintenta hasta 3 veces (3 que ries diferentes).
+      catchError (err => {
+        console.error (err)
+        return of(`Error final: ${err.message}`)
+      })
     ).subscribe(res => {
-      let result = res as State;
-      this.result = result;
-      this.cdr.detectChanges();
+      console.log (res)
+      if (typeof res === 'object') {
+        let result = res as State;
+        this.result.set (result.name);
+      }
+      else {
+        let s = res as string;
+        this.result.set (s);
+      }
+      // this.cdr.detectChanges();
     });
   }
 
