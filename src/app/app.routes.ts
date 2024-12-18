@@ -47,6 +47,10 @@ export const routes: Routes = [
         loadComponent: () => import('./rxjs-test/operators/operators.component').then( m => m.OperatorsComponent),
       },
       {
+        path: 'gpt-ex1',
+        loadComponent: () => import('./rxjs-test/gpt-exercise1/gpt-exercise1.component').then( m => m.GptExercise1Component),
+      },
+      {
         path: '',
         redirectTo: 'filter-states',
         pathMatch: 'full'
