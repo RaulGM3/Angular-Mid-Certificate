@@ -28,8 +28,8 @@ export class GptExercise1Component {
 
   ngAfterViewInit(): void {
     const a = fromEvent<KeyboardEvent>(this.input.nativeElement, 'keyup')
-    .pipe(debounceTime (300));
-    a.pipe (
+    .pipe(
+      debounceTime (300),
       map (event => (event.target as HTMLInputElement).value),
       switchMap (val => this.callApi (val)),
       retry (3), // Reintenta hasta 3 veces (3 que ries diferentes).

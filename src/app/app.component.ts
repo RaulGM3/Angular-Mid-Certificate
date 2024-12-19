@@ -16,16 +16,16 @@ export class AppComponent {
     private route: ActivatedRoute,
     private authServ: AuthService
   ){
-    console.log (this.router.routerState);
+    // console.log (this.router.routerState);
     this.route.url.subscribe (url => {
-      console.log ('url', url);
+      // console.log ('url', url);
     })
   }
   
   ngAfterContentChecked(): void {
-    console.log ('snap.url', this.route.snapshot.url)
+    // console.log ('snap.url', this.route.snapshot.url)
     this.route.snapshot.url.forEach (url => {
-      console.log ('urlparam', url);
+      // console.log ('urlparam', url);
     })
 
   }
