@@ -1,5 +1,11 @@
 <p appHighlight>directives-test works!</p>
-<p [appConditionalHighlight]="color" defaultColor="violet">conditional highlight works! Mouse in and out</p>
+<p [appConditionalHighlight]="color" defaultColor="violet">
+  Conditional highlight works! With the defaultColor Attr.
+</p>
+<p [appConditionalHighlight]="color"> 
+  Conditional highlight without the defaultColor attr.
+</p>
+
 <h4>Pick a highlight color</h4>
 <div>
   <input type="radio" name="colors" (click)="turnGreen ()">lightgreen
@@ -7,7 +13,8 @@
   <input type="radio" name="colors" (click)="turnYellow ()">yellow
 </div>
 <p ngNonBindable>This is a nonBindable test{{1+1}}</p>
-<p>This is a nonBindable test{{1+1}}</p>
+<p>This is NOT a nonBindable test{{1+1}}</p>
+
 <h3>ngNonBindable with a directive</h3>
 <div ngNonBindable [appConditionalHighlight]="'yellow'">This should not evaluate: {{ 1 +1 }}, but will highlight yellow.
 </div>

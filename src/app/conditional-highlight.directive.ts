@@ -15,9 +15,13 @@ export class ConditionalHighlightDirective {
     console.log (this.appConditionalHighlight)
     this.highlight(this.appConditionalHighlight || this.defaultColor || 'red');
   }
+
+  
   @HostListener('mouseleave') onMouseLeave() {
     this.highlight('');
   }
+
+  
   private highlight(color: string) {
     this.el.nativeElement.style.backgroundColor = color;
   }

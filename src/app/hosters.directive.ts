@@ -13,6 +13,4 @@ export class HostersDirective {
     console.log ('myclasses', this.myClasses)
     console.log ('notActive', this.notActive)
   }
-
-  
 }
