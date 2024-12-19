@@ -1,7 +1,6 @@
 <h1>Forms</h1>
 <label for="zip">zip</label>
-<!-- <input type="text" name="zip" ngModel required pattern="[0-9]{5}"> -->
-<input type="text" [formControl]="myControl" required=""/>
+<input type="text" [formControl]="myControl"/>
 @if (myControl.invalid && myControl.touched) {
   <p style="color: red">Zipcode must have 5 digits.</p>
 }
@@ -17,20 +16,27 @@
   <pre> 
     <code [ngClass]="myControl.valid ? 'active' : ''">
       input.ng-valid
-        border-left: 5px solid green
-        background-color: lightgreen
+      border-left: 5px solid green
+      background-color: lightgreen
     </code>
     
     <code [ngClass]="myControl.invalid && myControl.touched ? 'active' : ''">
       input.ng-invalid.ng-touched
-        border-left: 5px solid red
-        background-color: pink
+      border-left: 5px solid red
+      background-color: pink
     </code>
     
     <code [ngClass]="myControl.untouched ? 'active' : ''">
       input.ng-untouched
-        border-left: default
-        background-color: transparent
+      border-left: default
+      background-color: transparent
     </code>
   </pre>
 </div>
+<h1>Easy formsModule with ngModel.</h1>
+
+<form #form="ngForm">
+  <p>This form will accept only a-z characters. Length 5</p>
+  <input type="text" name="zip" ngModel required pattern="[a-z]{5}">
+  <button [disabled]="!form['valid']">Ok</button>
+</form>

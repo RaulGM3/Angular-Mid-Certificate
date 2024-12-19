@@ -21,6 +21,10 @@ export class ConditionalHighlightDirective {
     this.highlight('');
   }
 
+  @HostListener ('click') onClick () {
+    this.el.nativeElement.style.color = 'transparent';
+  }
+
   
   private highlight(color: string) {
     this.el.nativeElement.style.backgroundColor = color;
