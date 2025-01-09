@@ -10,7 +10,7 @@ import { ChildComponent } from './child/child.component';
 })
 export class CComponent {
   @Input() anyInput!: string;
-  age = signal (2);
+  parentAge = signal (2);
   
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.

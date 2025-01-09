@@ -7,10 +7,10 @@ import { Component, model } from '@angular/core';
   styleUrl: './child.component.sass'
 })
 export class ChildComponent {
-  age = model (21);
+  childAge = model (21);
 
   change (ev: Event) {
     console.log (ev)
-    this.age.set (parseInt ((ev.target as HTMLInputElement).value));
+    this.childAge.set (parseInt ((ev.target as HTMLInputElement).value));
   }
 }
